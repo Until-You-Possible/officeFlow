@@ -4,7 +4,6 @@ import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
-import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
