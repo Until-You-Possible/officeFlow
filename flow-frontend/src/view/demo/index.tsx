@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const UI5Demo: React.FC = () => {
+const Index: React.FC = () => {
     return (
         <>
             demo page
@@ -10,4 +10,4 @@ const UI5Demo: React.FC = () => {
     )
 }
 
-export default UI5Demo;
+export default Index;
