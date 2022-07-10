@@ -26,29 +26,16 @@
 }
 
 .MRoot {
-    border-radius: 12px;
-    width: 440px;
-    text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    min-width: 440px;
+    padding: 10px;
 }
 
-.MHead {
+.MTypographyTitle {
     text-align: center;
-    letter-spacing: 10px;
-}
-
-.MList {
-    padding: 20px;
-}
-
-.MButton {
-    width: 100%;
-}
-
-.MAction {
-    display: flex;
-    justify-content: space-between,
+    font-size: 40px;
+    font-weight: 600;
 }
