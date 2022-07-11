@@ -31,11 +31,17 @@
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 440px;
-    padding: 10px;
+    padding: 10px 10px 0;
 }
 
 .MTypographyTitle {
     text-align: center;
-    font-size: 40px;
+    font-size: 1.2rem !important;
     font-weight: 600;
+}
+
+.MAvatar {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
 }

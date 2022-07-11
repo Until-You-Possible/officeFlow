@@ -1,44 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import loginStyle from "../../css/login.module.css";
 import {
     Avatar,
     Box,
     Button,
     Card,
-    CardActions,
     CardContent,
-    CardHeader,
-    Divider, FormControl, Grid, Input, InputAdornment, InputLabel, Paper, styled, TextField,
-    Typography
+    Divider,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    OutlinedInput,
+    TextField
 } from "@mui/material";
 
-function MarginBar() {
-    return (
-        <Box
-            sx={{
-                height: 30,
-                backgroundColor: (theme: any) =>
-                    theme.palette.mode === 'light'
-                        ? 'rgba(255, 255, 255, 1)'
-                        : 'rgb(255 132 132 / 25%)',
-            }}
-        />
-    );
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import HeightBar from "../../util/HeightBar";
+
+
+interface State {
+    showPassword : boolean;
+    username : string;
+    password : string;
 }
 
-function Choice() {
+interface ConditionState {
+    focusedUsername?: boolean,
+    focusedPassword?: boolean
+}
+
+function ChoiceBar () {
     return (
         <Box
             sx={{
-                height: 50,
-                textAlign: 'center',
-                lineHeight: "50px",
+                height: 40,
+                lineHeight: 40 + "px",
+                textAlign: "center",
                 color: (theme: any) =>
                     theme.palette.mode === 'light'
-                        ? 'rgba(0, 0, 0, .4)'
+                        ? 'rgba(0, 0, 0, .5)'
                         : 'rgb(255 132 132 / 25%)',
             }}
-        >OR</Box>
+        >or</Box>
     );
 }
 
@@ -46,8 +50,38 @@ function Choice() {
 
 const Login: React.FC = () => {
 
-    const handleChang = () => {
+    const [values, setValues] = useState<State>({
+        username     : '',
+        password     : '',
+        showPassword : false
+    });
 
+    const [focusedValue, setFocusedValue] = useState<ConditionState>({
+        focusedUsername: false,
+        focusedPassword: false
+    });
+
+    const handleChange = (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+            setValues({ ...values, [prop]: event.target.value });
+        };
+
+    const handleClickShowPassword = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
+        });
+    };
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement> | undefined) => {
+        event?.preventDefault();
+    };
+
+    const LoginButton = () => {
+        if (!values.username) {
+            setFocusedValue({
+                focusedUsername: true
+            });
+        }
     }
 
     return (
@@ -55,36 +89,66 @@ const Login: React.FC = () => {
             <div className={loginStyle.container}>
              <Card className={loginStyle.MRoot}>
                 <CardContent>
-                    <Typography className={loginStyle.MTypographyTitle}
-                                color="text.secondary"
-                                gutterBottom >
-                        log in to your account
-                    </Typography>
-                    <MarginBar />
+                    <Box className={loginStyle.MAvatar}>
+                        <Avatar src="https://mui.com/static/images/avatar/1.jpg" />
+                    </Box>
+                    <HeightBar />
                     <TextField
                         label="username"
                         fullWidth
                         required
+                        focused={focusedValue.focusedUsername}
                         id="outlined-name"
-                        color="secondary"
-                        value=""
+                        value={values.username}
+                        onChange={handleChange('username')}
                         placeholder="please input your username"
                     />
-                    <MarginBar />
-                    <TextField
-                        label="password"
+                    <HeightBar height={30} />
+                    <FormControl fullWidth >
+                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                        <OutlinedInput
+                            id="outlined-adornment-password"
+                            fullWidth
+                            size="medium"
+                            autoComplete="new-password"
+                            type={values.showPassword ? 'text' : 'password'}
+                            value={values.password}
+                            onChange={handleChange('password')}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    edge="end"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                            label="Password"
+                        />
+                    </FormControl>
+                    <HeightBar />
+                    <Button
                         fullWidth
-                        required
-                        color="secondary"
-                        id="outlined-name"
-                        value=""
-                        placeholder="please input your password"
-                    />
-                    <MarginBar />
-                    <Button fullWidth variant="contained" size="large">Log in</Button>
-                    <Choice />
-                    <Button fullWidth variant="outlined" size="large">Log in with wechat</Button>
-
+                        style={{textTransform: "none"}}
+                        variant="contained"
+                        onClick={LoginButton}
+                        size="large">Log in</Button>
+                    <ChoiceBar />
+                    <Button
+                        style={{textTransform: "none"}}
+                        fullWidth
+                        variant="outlined"
+                        size="large">Log in with wechat</Button>
+                    <HeightBar />
+                    <Divider />
+                    <HeightBar height={26} />
+                    <Button
+                        fullWidth
+                        style={{textTransform: "none"}}
+                        variant="text">Can't log in ?  · Sign up for account</Button>
                 </CardContent>
             </Card>
 
