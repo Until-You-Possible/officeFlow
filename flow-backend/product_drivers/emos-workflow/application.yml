@@ -1,0 +1,70 @@
+server:
+  jetty:
+    threads:
+      acceptors: 4
+      selectors: 8
+  port: 9090
+  servlet:
+    context-path: /emos-workflow
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 2MB
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/emos?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+      username: root
+      password: 123
+      initial-size: 2
+      max-active: 4
+      min-idle: 4
+      max-wait: 60000
+      test-while-idle: false
+      test-on-borrow: true
+      test-on-return: false
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: 123
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 16
+        min-idle: 8
+  activiti:
+    database-schema-update: true
+    historyLevel: audit
+    db-history-used: true
+  quartz:
+    job-store-type: jdbc
+  mail:
+    default-encoding: UTF-8
+    host: smtp.aliyun.com
+    username: arthurwanggang@aliyun.com
+    password: 123
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.example.emos.workflow.db.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    com.example.demo.workflow.db.dao : error
+  pattern:
+    console: "%d{HH:mm:ss}  %-5level  %msg%n"
+
+tencent:
+  cloud:
+    appId: 腾讯云COS的APPID
+    secretId: 腾讯云COS的SecretId
+    secretKey: 腾讯云COS的SecretKey
+    region: 存储桶位置
+    bucket: 存储桶名称
