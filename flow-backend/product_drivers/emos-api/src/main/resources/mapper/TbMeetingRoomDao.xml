@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.emos.api.db.dao.TbMeetingRoomDao">
+    <select id="searchAllMeetingRoom" resultType="HashMap">
+        SELECT id,
+               `name`
+        FROM tb_meeting_room
+        WHERE status=1
+    </select>
+    <select id="searchById" parameterType="int" resultType="HashMap">
+        SELECT id,
+               name,
+               max,
+               `desc`,
+               status
+        FROM tb_meeting_room
+        WHERE id = #{id}
+    </select>
+    <select id="searchFreeMeetingRoom" parameterType="HashMap" resultType="String">
+        SELECT temp.name
+        FROM (
+                SELECT mr.`name`, m.id
+                FROM tb_meeting_room mr
+                LEFT JOIN tb_meeting m ON mr.`name`=m.place
+                AND m.date=#{date}
+                AND(
+                    (#{start} BETWEEN m.`start` AND m.`end`) OR
+                    (#{end} BETWEEN m.`start` AND m.`end`)
+                )
+             ) temp
+        WHERE temp.id IS NULL
+    </select>
+</mapper>

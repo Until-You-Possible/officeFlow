@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.emos.api.db.dao.TbMeetingDao">
+    <select id="searchMeetingMembersInSameDept" parameterType="String" resultType="boolean">
+        SELECT
+            IF(COUNT(DISTINCT u.dept_id)=1,TRUE,FALSE ) AS bool
+        FROM tb_meeting m
+        JOIN tb_user u ON JSON_CONTAINS ( m.members, CAST( u.id AS CHAR ) )
+        WHERE m.uuid=#{uuid} AND u.status = 1
+    </select>
+    <select id="searchMeetingById" parameterType="long" resultType="HashMap">
+        SELECT
+            m.uuid,
+            m.creator_id AS creatorId,
+            IF(creator_id=#{userId},"true","false") AS isCreator,
+            m.title,
+            u.name,
+            DATE_FORMAT( m.date, '%Y-%m-%d' ) AS date,
+            m.place,
+            DATE_FORMAT( m.START, '%H:%i' ) AS start,
+            DATE_FORMAT( m.END, '%H:%i' ) AS end,
+            m.type,
+            m.status,
+            m.desc,
+            m.instance_id AS instanceId
+        FROM tb_meeting m
+        JOIN tb_user u ON m.creator_id = u.id
+        WHERE m.id =#{id} AND u.status = 1
+    </select>
+</mapper>

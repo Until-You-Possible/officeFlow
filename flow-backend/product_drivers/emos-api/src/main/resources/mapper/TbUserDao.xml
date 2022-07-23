@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.emos.api.db.dao.TbUserDao">
+    <select id="searchUserPermissions" parameterType="int" resultType="String">
+        SELECT DISTINCT p.permission_name
+        FROM tb_user u
+        JOIN tb_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+        JOIN tb_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
+        WHERE u.id = #{userId}
+        AND u.status = 1
+    </select>
+    <select id="searchIdByOpenId" parameterType="String" resultType="Integer">
+        SELECT id FROM tb_user WHERE open_id=#{openId} AND status = 1
+    </select>
+    <select id="searchUserSummary" parameterType="int" resultType="HashMap">
+        SELECT u.name, u.photo, d.dept_name AS deptName
+        FROM tb_user u LEFT JOIN tb_dept d ON u.dept_id=d.id
+        WHERE u.id=#{userId} AND u.status=1
+    </select>
+    <select id="searchUserInfo" parameterType="int" resultType="HashMap">
+        SELECT
+            u.open_id AS openId,
+            u.nickname,
+            u.name,
+            u.photo,
+            u.sex,
+            u.tel,
+            u.email,
+            d.dept_name AS dept,
+            u.hiredate,
+            u.status,
+            ( SELECT GROUP_CONCAT( role_name separator "，" ) FROM tb_role WHERE JSON_CONTAINS ( u.role, CONVERT ( id, CHAR ) ) ) AS roles
+        FROM tb_user u
+        LEFT JOIN tb_dept d ON u.dept_id = d.id
+        WHERE u.id = #{userId} AND u.status = 1
+    </select>
+    <select id="searchDeptManagerId" parameterType="int" resultType="Integer">
+        SELECT u2.id
+        FROM tb_user u1 JOIN tb_user u2 ON u1.dept_id=u2.dept_id
+        JOIN tb_role r ON JSON_CONTAINS(u2.role, CAST(r.id AS CHAR))
+        WHERE u1.id=#{id} AND r.id=2 AND u1.status = 1 AND u2.status = 1
+        ORDER BY u2.create_time DESC
+        LIMIT 1
+    </select>
+    <select id="searchGmId" resultType="Integer">
+        SELECT u.id
+        FROM tb_user u
+        JOIN tb_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+        WHERE r.id=1 AND u.status = 1
+        ORDER BY u.create_time DESC
+        LIMIT 1
+    </select>
+    <select id="searchById" parameterType="int" resultType="HashMap">
+        SELECT
+            id, username, name, sex, tel, email, hiredate, role, dept_id AS deptId, status,
+            CAST(AES_DECRYPT(UNHEX(password),username) AS CHAR) AS password
+        FROM tb_user
+        WHERE id=#{userId}
+    </select>
+    <select id="searchAllUser" resultType="HashMap">
+        SELECT id,`name`
+        FROM tb_user
+        WHERE status = 1
+    </select>
+</mapper>
