@@ -1,2 +1,2 @@
 # officeFlow
-SSM，springboot, materialUI, Typescript，vue, react
+SSM，springboot, materialUI, Typescript

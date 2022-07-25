@@ -5,7 +5,7 @@
 - mysql(8.以上)
 - mongoDB4.4.7
 - redis6.2.6
-- rabbitMQ3.8.9
+- rabbitMQ3.9.13
 - 腾讯云服务器
 - 腾讯云存储对象
 - workflow
