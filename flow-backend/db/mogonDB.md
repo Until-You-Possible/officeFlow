@@ -6,15 +6,15 @@
 
 brew install mongodb-community@5.0
 
+// 关于homebrew的安装，默认是安装在了 /opt/homebrew/Cellar 下
+
 // 启动服务
 
-brew services start mongodb-community@5.0
+// 目前个人电脑。这种方式装在了/opt/下 (新版 apple interl)
 
-// 目前个人电脑。这种方式装在了 目前自己不清楚的地方(等我清楚就来更新文档)
+// 进入bin目录 直接 mongo 来启动
 
-直接根下启动， 目前是启动成功了～
-
-mongo
+// 使用mongodb-compass连接
 
 ```
 
