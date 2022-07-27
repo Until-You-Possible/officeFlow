@@ -1,0 +1,51 @@
+@import url("Desktop/github/officeSystem/officeFlow/deps/frontend/emos-wx/style.less");
+.page{
+	padding: 35rpx;
+	.header{
+		position: relative;
+		display: flex;
+		.keyword{
+			border: solid 1rpx #EEEEEE;
+			background-color: #F5F5F5;
+			font-size: 30rpx;
+			box-sizing: border-box;
+			height: 70rpx;
+			border-radius: 10rpx;
+			padding: 0 25rpx 0 70rpx;
+			color: #666;
+			flex-grow: 1;
+			flex-shrink: 1;
+		}
+		.search-icon{
+			position: absolute;
+			top: 22rpx;
+			left: 25rpx;
+
+		}
+		.btn{
+			height: 70rpx;
+			box-sizing: border-box;
+			padding: 0 20rpx;
+			line-height: 70rpx;
+			font-size: 28rpx;
+			flex-grow: 0;
+			flex-shrink: 0;
+			margin-left: 20rpx;
+			border-radius: 10rpx;
+			background-color: @background-color;
+			color: #fff;
+			&:active{
+				background-color: @background-color-active;
+			}
+		}
+	}
+	.list-title {
+		margin-top: 35rpx;
+		margin-bottom: 35rpx;
+		font-size: 32rpx;
+		font-weight: bold;
+		color: @background-color;
+		border-left: solid 15rpx @background-color;
+		padding-left: 20rpx;
+	}
+}

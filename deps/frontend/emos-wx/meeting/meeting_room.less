@@ -1,0 +1,178 @@
+@import url('Desktop/github/officeSystem/officeFlow/deps/frontend/emos-wx/style.less');
+.banner{
+	width: 100%;
+	margin-top: 0rpx;
+	display: block;
+}
+.room{
+	background-color: #fff;
+	height: 500rpx;
+	border-top-left-radius: 50rpx;
+	border-top-right-radius: 50rpx;
+	position: relative;
+	top:-50rpx;
+	padding: 40rpx;
+	.header{
+		display: flex;
+		justify-content: space-between;
+		.title{
+			font-size: 40rpx;
+			font-weight: bold;
+			color:@font-color;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.status{
+			color: red;
+			font-size: 30rpx;
+		}
+	}
+	.attr-container{
+		border-bottom: 1rpx #f0f0f0 dashed;
+		padding-top: 40rpx;
+		padding-bottom: 40rpx;
+		.row{
+			display: flex;
+			margin-bottom: 35rpx;
+			&:last-child{
+				margin-bottom: 0;
+			}
+			.attr{
+				display: flex;
+				margin-right: 100rpx;
+				&:last-child{
+					margin-right: 0;
+				}
+				image{
+					width: 45rpx;
+					height: auto;
+					margin-right: 15rpx;
+					margin-top: 3rpx;
+				}
+				text{
+					font-size: 34rpx;
+					color:@font-color;
+				}
+			}
+		}
+	}
+	.meeting-container{
+		padding-top: 55rpx;
+		padding-left: 0;
+		padding-right: 0;
+		.row{
+			display: flex;
+			margin-bottom: 55rpx;
+			&:last-child{
+				margin-bottom: 0;
+			}
+			image{
+				width: 100rpx;
+				height: 100rpx;
+			}
+			.right{
+				margin-left: 35rpx;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				.title{
+					display: block;
+					font-size: 34rpx;
+					font-weight: bold;
+					color: @font-color;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+				}
+				.desc{
+					display: block;
+					font-size: 30rpx;
+					color: @font-color;
+				}
+			}
+		}
+		.sub-title{
+			font-size: 34rpx;
+			color: #333;
+			display: block;
+			text-align: center;
+			display: flex;
+			margin-bottom: 40rpx;
+			span{
+				display: block;
+				margin: 0 25rpx;
+				font-weight: bold;
+			}
+			&::before{
+				border-bottom: dashed #f0f0f0 1rpx;
+				display: block;
+				content: "";
+				height: 0;
+				flex-grow: 1;
+				flex-shrink: 1;
+				margin-top: 18rpx;
+			}
+			&::after{
+				border-bottom: dashed #f0f0f0 1rpx;
+				display: block;
+				content: "";
+				height: 0;
+				flex-grow: 1;
+				flex-shrink: 1;
+				margin-top: 18rpx;
+			}
+		}
+	}
+	.member-container{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		.member{
+			width: 100rpx;
+			max-width: 20%;
+			min-width: 20%;
+			margin-bottom: 40rpx;
+			image{
+				width: 100rpx;
+				height: 100rpx;
+				border-radius: 50rpx;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.name{
+				display: block;
+				width: 100rpx;
+				text-align: center;
+				font-size: 30rpx;
+				color: @font-color;
+				margin-top: 10rpx;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+	.meeting-list{
+		margin-top: 50rpx;
+		padding-bottom: 50rpx;
+		.title{
+			font-size: 34rpx;
+			color: @font-color;
+			font-weight: bold;
+			display: block;
+			padding-left: 12rpx;
+			line-height: 1;
+			border-left: solid 10rpx #3474FF;
+		}
+		.desc{
+			font-size: 30rpx;
+			color: #999;
+			line-height: 1.7;
+			padding-top: 30rpx;
+			display: block;
+		}
+	}
+
+
+}

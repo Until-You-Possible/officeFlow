@@ -1,0 +1,77 @@
+@import url("Desktop/github/officeSystem/officeFlow/deps/frontend/emos-wx/style.less");
+.page{
+	padding: 35rpx;
+}
+
+.list{
+	margin-bottom: 80rpx;
+	.item{
+		padding: 30rpx 15rpx;
+		border-bottom: solid 1rpx #E5E5E5;
+		font-size: 30rpx;
+		color: #333;
+		display: flex;
+		justify-content: space-between;
+		// &:last-of-type{
+		// 	border-bottom: none;
+		// }
+		.key{
+
+		}
+		.value{
+
+		}
+	}
+}
+.save-btn{
+	margin-bottom: 30rpx;
+	background-color: @background-color;
+	color: #fff;
+}
+.delete-btn{
+	background-color: #FF4234;
+	color: #fff;
+}
+.shadow{
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	z-index: 999;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.dialog{
+		background-color: #fff;
+		width: 65%;
+		max-height: 800rpx;
+		padding: 45rpx;
+		position: relative;
+		border-radius: 15rpx;
+		.confirm{
+			position: absolute;
+			right: 0rpx;
+			top: 0rpx;
+			color: green;
+			font-size: 32rxp;
+		}
+		.title{
+			font-size: 36rpx;
+			color: #333;
+			margin-bottom: 20rpx;
+			font-weight: bold;
+		}
+		.list-item{
+			display: block;
+			padding: 15rpx 0;
+			font-size: 32rpx;
+			color: #333;
+			text{
+				margin-left: 10rpx;
+				vertical-align: -5rpx;
+			}
+		}
+	}
+}
