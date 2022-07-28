@@ -6,13 +6,14 @@
 - 需要用到的sql文件
 
 
-### 1： 相关依赖项目一共5个， 分别是：
+### 1： 相关依赖项目一共3个， 分别是：
 
 - emos-wx-api
 - emos-wx
 - emos-workflow
-- emos-api
-- emos-vue
+
+此次项目的核心前端部分是flow-frontend (采用的技术是react+ts+chart)；
+此次项目的核心后端是flow-backend(采用的是spingBoot构建)
 
 
 | 序号  | 项目名称   | 备注                      |
