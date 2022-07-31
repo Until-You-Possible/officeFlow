@@ -1,4 +1,4 @@
-package com.example.flow.controller;
+package com.example.flow.api.v1;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
