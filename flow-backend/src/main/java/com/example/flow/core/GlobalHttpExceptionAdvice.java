@@ -1,7 +1,6 @@
 package com.example.flow.core;
 
-import org.apache.http.HttpException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.flow.exception.HttpException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,10 +28,10 @@ public class GlobalHttpExceptionAdvice {
     public ResponseEntity<UnifyResponse> handleHttpException(HttpServletRequest req, HttpException e){
         String requestUrl = req.getRequestURI();
         String method = req.getMethod();
-        UnifyResponse message = new UnifyResponse(500, "提示信息", method + " " + requestUrl);
+        UnifyResponse message = new UnifyResponse(e.getCode(), "提示信息", method + " " + requestUrl);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        String httpStatus = "123";
+        HttpStatus httpStatus = HttpStatus.resolve(e.getHttpStatusCode());
         if (httpStatus == null) {
             return new ResponseEntity<>(message, headers, 500);
         }
