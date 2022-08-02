@@ -26,6 +26,8 @@ public class ExceptionCodeConfiguration {
     public String getMessage(int code) {
         return codes.get(code);
     }
-
-
 }
+
+
+// 对 PropertySource设置  encoding = "UTF-8"
+//  如果是对于springboot默认生成的application.properties是没有效果的

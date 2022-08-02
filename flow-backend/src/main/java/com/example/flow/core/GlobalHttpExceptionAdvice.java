@@ -1,6 +1,8 @@
 package com.example.flow.core;
 
+import com.example.flow.core.configuration.ExceptionCodeConfiguration;
 import com.example.flow.exception.HttpException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalHttpExceptionAdvice {
 
+    private final ExceptionCodeConfiguration codeConfiguration;
+
+    @Autowired
+    public GlobalHttpExceptionAdvice(ExceptionCodeConfiguration codeConfiguration) {
+        this.codeConfiguration = codeConfiguration;
+    }
+
+    public String getShowMessage(HttpException e) {
+        return codeConfiguration.getMessage(e.getCode());
+    }
+
+
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
@@ -28,7 +42,7 @@ public class GlobalHttpExceptionAdvice {
     public ResponseEntity<UnifyResponse> handleHttpException(HttpServletRequest req, HttpException e){
         String requestUrl = req.getRequestURI();
         String method = req.getMethod();
-        UnifyResponse message = new UnifyResponse(e.getCode(), "提示信息", method + " " + requestUrl);
+        UnifyResponse message = new UnifyResponse(e.getCode(), this.getShowMessage(e), method + " " + requestUrl);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpStatus httpStatus = HttpStatus.resolve(e.getHttpStatusCode());
